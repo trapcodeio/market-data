@@ -6,10 +6,7 @@ import TwelveDataPrice, {
     AssetType,
     TwelveDataPriceDataType
 } from "../models/TwelveDataPrice";
-
-function sleep(ms: number) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-}
+import { sleep } from "../utils";
 
 /**
  *  Job: import:assets
@@ -51,7 +48,8 @@ export = {
                             price,
                             type: AssetType.Stock,
                             createdAt: new Date(),
-                            updatedAt: new Date()
+                            updatedAt: new Date(),
+                            isMarketOpen: false
                         });
 
                         newStockData.push(s);
@@ -96,7 +94,8 @@ export = {
                 type: AssetType.Forex,
                 price: 0,
                 updatedAt: new Date(),
-                createdAt: new Date()
+                createdAt: new Date(),
+                isMarketOpen: false
             });
         }
 

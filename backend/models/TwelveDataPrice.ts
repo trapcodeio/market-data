@@ -16,6 +16,7 @@ export interface TwelveDataPriceDataType {
     price: number;
     updatedAt?: Date;
     createdAt: Date;
+    isMarketOpen: boolean;
     data?: {
         open?: number;
         high?: number;
@@ -37,6 +38,7 @@ class TwelveDataPrice extends XMongoModel {
         symbol: is.String().required(),
         price: is.Number().required(),
         updatedAt: is.Date(),
+        isMarketOpen: is.Boolean(true).required(),
         data: is.Object().optional(),
         createdAt: is.Date().required()
     };

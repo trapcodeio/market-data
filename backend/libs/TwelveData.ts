@@ -73,6 +73,7 @@ export default class TwelveData {
         const { data } = await instance.get<{
             meta: { symbol: string };
             url: string;
+            logo_base?: string;
         }>(`/logo`, {
             params: {
                 symbol

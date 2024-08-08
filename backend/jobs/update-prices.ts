@@ -3,10 +3,8 @@ import TwelveData from "../libs/TwelveData";
 import env from "../../env";
 import TwelveDataPrice from "../models/TwelveDataPrice";
 import { jsb } from "../jsb";
+import { sleep } from "../utils";
 
-function sleep(ms: number) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-}
 /**
  *  Job: Update:prices
  */
@@ -65,6 +63,7 @@ export = {
 
             const quote = quotes[symbol];
             if (quote) {
+                $set.isMarketOpen = quote.is_market_open;
                 $set.data = {
                     open: parseFloat(quote.open),
                     high: parseFloat(quote.high),
