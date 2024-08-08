@@ -8,13 +8,13 @@
     "repl": "build/repl.js"
   },
   "prod": {
-    "main": "dist/main.js",
+    "main": "build/main.js",
     "start_cron": "npx pm2 start",
     "stop_cron": "npx pm2 stop",
     "start_server": "npx pm2 start",
     "stop_server": "npx pm2 stop",
     "start_console": "node",
-    "jobs_path": "build/backend/jobs",
+    "jobs_path": "backend/jobs",
     "repl": "build/repl.js"
   },
   "async_cron_jobs": false,
