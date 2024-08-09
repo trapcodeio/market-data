@@ -44,7 +44,14 @@ class TwelveDataPrice extends XMongoModel {
     };
 
     // Public Fields
-    static publicFields = ["type", "symbol", "price", "updatedAt", "data"];
+    static publicFields = [
+        "type",
+        "symbol",
+        "price",
+        "updatedAt",
+        "data",
+        "isMarketOpen"
+    ];
 
     // SET Type of this.data.
     public data!: TwelveDataPriceDataType;
