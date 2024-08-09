@@ -4,7 +4,8 @@ import { UseCollection } from "@xpresser/xpress-mongo";
 export enum AssetType {
     Stock = "stock",
     Crypto = "crypto",
-    Forex = "forex"
+    Forex = "forex",
+    Commodity = "commodity"
 }
 /**
  * Interface for Model's `this.data`. (For Typescript)

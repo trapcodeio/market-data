@@ -69,6 +69,23 @@ export default class TwelveData {
         return data;
     }
 
+    static async commoditiesList() {
+        const { data } = await instance.get<{
+            data: Array<{
+                symbol: string;
+                name: string;
+                category: string;
+                description: string;
+            }>;
+        }>("/forex_pairs", {
+            params: {
+                currency_quote: "USD"
+            }
+        });
+
+        return data;
+    }
+
     static async getLogo(symbol: string) {
         const { data } = await instance.get<{
             meta: { symbol: string };
