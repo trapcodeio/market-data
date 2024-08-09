@@ -6,7 +6,6 @@ import TwelveDataPrice, {
     AssetType,
     TwelveDataPriceDataType
 } from "../models/TwelveDataPrice";
-import { sleep } from "../utils";
 import Xpresser from "xpresser/types";
 
 /**
