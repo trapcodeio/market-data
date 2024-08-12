@@ -31,6 +31,8 @@ export = {
             { updatedAt: { $lt: new Date(Date.now() - 1000 * 60 * 5) } },
             {
                 limit: limitsRemaining,
+                // sort by "least updated first"
+                // so we can update the oldest first
                 sort: { updatedAt: 1 },
                 projection: { symbol: 1 }
             }
