@@ -77,7 +77,7 @@ export default class TwelveData {
                 category: string;
                 description: string;
             }>;
-        }>("/forex_pairs", {
+        }>("/commodities", {
             params: {
                 currency_quote: "USD"
             }
