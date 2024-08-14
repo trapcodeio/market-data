@@ -79,7 +79,7 @@ export default class TwelveData {
             }>;
         }>("/commodities", {
             params: {
-                currency_quote: "USD"
+                // currency_quote: "USD"
             }
         });
 
