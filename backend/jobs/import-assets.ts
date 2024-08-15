@@ -38,12 +38,18 @@ export = {
     }
 };
 
+const unsupportedForexSymbols = ["NG/USD", "NG/EUR", "NG/GBP"];
 async function getForex($: Xpresser.DollarSign, data: TwelveDataPriceDataType[]) {
     $.log("Fetching Forex symbols from TwelveData");
     const forexSymbols = await TwelveData.forexList();
     const forexHasDoc = await jsb.hasOwnDocument("market-data/forex-list");
 
     for (const s of forexSymbols.data) {
+        if (unsupportedForexSymbols.includes(s.symbol)) {
+            $.logError(`Skipping unsupported symbol ${s.symbol}`);
+            continue;
+        }
+
         data.push({
             symbol: s.symbol,
             type: AssetType.Forex,

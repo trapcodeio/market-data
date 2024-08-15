@@ -24,7 +24,7 @@ export = {
         const total = Object.keys(prices).length;
         let count = 0;
 
-        for (const symbol in prices) {
+        for (let symbol in prices) {
             count++;
             if (logos[symbol]) {
                 $.logInfo(`Logo already exists for ${symbol} - ${count}/${total}`);
