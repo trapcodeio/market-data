@@ -47,7 +47,7 @@ export = {
 
         // fetch prices
         $.logInfo(`Fetching prices for ${symbols.length} symbols`);
-        console.log(symbols);
+        // console.log(symbols);
         const prices = await TwelveData.getRealtimePrice(symbols);
         const quotes = await TwelveData.getStocksQuotes(symbols);
         const bulkWriteQuery: any[] = [];
