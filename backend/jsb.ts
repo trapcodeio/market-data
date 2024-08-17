@@ -25,7 +25,7 @@ type Price = {
     };
 };
 export async function jsb_Prices() {
-    const res = await jsb.getOwnContent<Array<Price>>("market-data/prices");
+    const res = await jsb.getOwnContent<Array<Price>>("market-data/assets/prices");
 
     return res.reduce(
         (acc, cur) => {

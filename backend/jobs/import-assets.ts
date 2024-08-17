@@ -42,7 +42,7 @@ const unsupportedForexSymbols = ["NG/USD", "NG/EUR", "NG/GBP"];
 async function getForex($: Xpresser.DollarSign, data: TwelveDataPriceDataType[]) {
     $.log("Fetching Forex symbols from TwelveData");
     const forexSymbols = await TwelveData.forexList();
-    const forexHasDoc = await jsb.hasOwnDocument("market-data/forex-list");
+    const forexHasDoc = await jsb.hasOwnDocument("market-data/assets/forex-list");
 
     for (const s of forexSymbols.data) {
         if (unsupportedForexSymbols.includes(s.symbol)) {
@@ -63,7 +63,10 @@ async function getForex($: Xpresser.DollarSign, data: TwelveDataPriceDataType[])
     if (forexHasDoc) {
         // update document
         $.logInfo("Updating forex-list.json");
-        const res = await jsb.updateOwnDocument("market-data/forex-list", forexSymbols);
+        const res = await jsb.updateOwnDocument(
+            "market-data/assets/forex-list",
+            forexSymbols
+        );
 
         if (!res.changed) {
             $.logCalmly("No changes detected in forex-list.json");
@@ -74,7 +77,8 @@ async function getForex($: Xpresser.DollarSign, data: TwelveDataPriceDataType[])
         await jsb.createDocument({
             name: "forex-list",
             project: "market-data",
-            content: forexSymbols
+            content: forexSymbols,
+            folder: "assets"
         });
     }
 
@@ -84,7 +88,9 @@ async function getForex($: Xpresser.DollarSign, data: TwelveDataPriceDataType[])
 async function getCommodities($: Xpresser.DollarSign, data: TwelveDataPriceDataType[]) {
     $.log("Fetching Commodities symbols from TwelveData");
     const commoditiesSymbols = await TwelveData.commoditiesList();
-    const commoditiesHasDoc = await jsb.hasOwnDocument("market-data/commodities-list");
+    const commoditiesHasDoc = await jsb.hasOwnDocument(
+        "market-data/assets/commodities-list"
+    );
 
     for (const s of commoditiesSymbols.data) {
         data.push({
@@ -101,7 +107,7 @@ async function getCommodities($: Xpresser.DollarSign, data: TwelveDataPriceDataT
         // update document
         $.logInfo("Updating commodities-list.json");
         const res = await jsb.updateOwnDocument(
-            "market-data/commodities-list",
+            "market-data/assets/commodities-list",
             commoditiesSymbols.data
         );
 
@@ -114,7 +120,8 @@ async function getCommodities($: Xpresser.DollarSign, data: TwelveDataPriceDataT
         await jsb.createDocument({
             name: "commodities-list",
             project: "market-data",
-            content: commoditiesSymbols.data
+            content: commoditiesSymbols.data,
+            folder: "assets"
         });
     }
 
@@ -126,7 +133,7 @@ const unsupportedStockSymbols = ["ATVI", "SPLK", "CERN", "ALXN", "SGEN"];
 async function getStocks($: Xpresser.DollarSign, data: TwelveDataPriceDataType[]) {
     $.log("Fetching stock symbols from MarketStack");
     const stocks = await MarketStack.tickers();
-    const hasDoc = await jsb.hasOwnDocument("market-data/stocks-list");
+    const hasDoc = await jsb.hasOwnDocument("market-data/assets/stocks-list");
     const newStockData: typeof stocks.data = [];
 
     console.log(stocks.pagination);
@@ -158,7 +165,7 @@ async function getStocks($: Xpresser.DollarSign, data: TwelveDataPriceDataType[]
     if (hasDoc) {
         // update document
         $.logInfo("Updating stocks-list.json");
-        const res = await jsb.updateOwnDocument("market-data/stocks-list", stocks);
+        const res = await jsb.updateOwnDocument("market-data/assets/stocks-list", stocks);
         if (!res.changed) {
             $.logCalmly("No changes detected in stocks-list.json");
         }
@@ -168,7 +175,8 @@ async function getStocks($: Xpresser.DollarSign, data: TwelveDataPriceDataType[]
         await jsb.createDocument({
             name: "stocks-list",
             project: "market-data",
-            content: stocks
+            content: stocks,
+            folder: "assets"
         });
     }
 

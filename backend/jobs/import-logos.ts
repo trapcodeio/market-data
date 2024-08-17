@@ -11,7 +11,7 @@ export = {
     async handler(args: string[], job: JobHelper): Promise<any> {
         const $ = job.$;
 
-        const hasPrices = await jsb.hasOwnDocument("market-data/prices");
+        const hasPrices = await jsb.hasOwnDocument("market-data/assets/prices");
         if (!hasPrices) return $.logErrorAndExit("Prices document not found.");
 
         const prices = await jsb_Prices();
@@ -19,8 +19,9 @@ export = {
 
         // prices is assumed to be the total number of assets
         // we can use this to get logos
-        const logos: Record<string, string> =
-            await jsb.getOwnContent("market-data/logos");
+        const logos: Record<string, string> = await jsb.getOwnContent(
+            "market-data/assets/logos"
+        );
         const total = Object.keys(prices).length;
         let count = 0;
 
@@ -46,7 +47,7 @@ export = {
         }
 
         // Save logos to file
-        const logosFile = "market-data/logos";
+        const logosFile = "market-data/assets/logos";
         const logosDocExists = await jsb.hasOwnDocument(logosFile);
 
         if (logosDocExists) {
@@ -57,7 +58,8 @@ export = {
             await jsb.createDocument({
                 name: "logos",
                 content: logos,
-                project: "market-data"
+                project: "market-data",
+                folder: "assets"
             });
         }
 

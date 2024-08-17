@@ -103,7 +103,7 @@ export = {
         );
 
         $.logInfo("Saving prices to jsonbank");
-        const docPath = "market-data/prices";
+        const docPath = "market-data/assets/prices";
         const hasDoc = await jsb.hasOwnDocument(docPath);
 
         if (hasDoc) {
@@ -119,7 +119,8 @@ export = {
             await jsb.createDocument({
                 name: "prices",
                 project: "market-data",
-                content: allPrices
+                content: allPrices,
+                folder: "assets"
             });
         }
 
