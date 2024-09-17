@@ -16,10 +16,15 @@ export = {
         // first check if we can afford requests
         const usage = await TwelveData.apiUsage();
         const limitPerMinute = env.TWELVE_DATA_API_LIMIT_PER_MINUTE ?? 55;
-        let limitsRemaining = limitPerMinute - usage.current_usage; // 5 is for safety
-        if (limitsRemaining <= 5) return $.logErrorAndExit("API Limit Reached");
+        let limitsRemaining = limitPerMinute - usage.current_usage;
+        if (limitsRemaining <= 5)
+            return $.logErrorAndExit(
+                `API Limit Reached, ${limitsRemaining} requests left`
+            );
 
-        limitsRemaining = limitsRemaining - 5;
+        // now we are certain we have more than 5 requests left, i.e 6 or more
+        // reduce by 4 to be safe just in case so at least we have 2 requests left
+        limitsRemaining = limitsRemaining - 4;
         // divide and round down
         // because half will be used to fetch prices
         // and the other half will be used to get quotes
