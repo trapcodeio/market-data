@@ -17,7 +17,7 @@
     "jobs_path": "backend/jobs",
     "repl": "build/repl.js"
   },
-  "async_cron_jobs": false,
+  "async_cron_jobs": true,
   "stacks": {
     "tsc": [
       "rm -rf build",
